@@ -29,11 +29,11 @@ Implementing RSA from scratch in different languages.
 
 # Languages 
 
-[ ] Python
-[ ] Erlang
-[ ] Rust
-[ ] C/C++
-[ ] JavaScript
+- [ ] Python
+- [ ] Erlang
+- [ ] Rust
+- [ ] C/C++
+- [ ] JavaScript
 
 # Contributing
 
