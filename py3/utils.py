@@ -7,12 +7,11 @@
 # Last Modified By  : Kaushik S Kalmady
 
 
-def exp(x, n, p):
+def exp(x, n, p=1000007):
     """returns x^n mod p
 
     >>> exp(2,47,1000007)
     199807
-
     >>> exp(3,51,678)
     93
     """
@@ -26,6 +25,26 @@ def exp(x, n, p):
         n = n >> 1
 
     return ans
+
+
+
+def legendre(a,b):
+    """"Calculates the Legendre symbol for the given parameters
+
+
+    :param a:
+    :param b:
+    """
+    pass
+
+
+def jacobi(a, b):
+    """Calculates the Jacobi symbol for the given parameters
+
+    :param a:
+    :param b:
+    """
+    pass
 
 
 if __name__ == "__main__":
