@@ -8,23 +8,26 @@
 
 
 def exp(x, n, p):
-    """exp
-    returns x^n mod p
+    """returns x^n mod p
 
-    :param x: base
-    :param n: power
-    :param p: mod value
+    >>> exp(2,47,1000007)
+    199807
+
+    >>> exp(3,51,678)
+    93
     """
-    ans = x
+    ans = 1
+    x = x % p
 
-    while n > 1:
-        ans = (ans * ans) % p
-        if n % 2:
+    while n > 0:
+        if n & 1:
             ans = (ans * x) % p
+        x = (x * x) % p
         n = n >> 1
 
     return ans
 
 
 if __name__ == "__main__":
-    print(exp(2, 47, 1000007))
+    import doctest
+    doctest.testmod()
