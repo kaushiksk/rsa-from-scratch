@@ -10,7 +10,7 @@
 def exp(x, n, p=1000007):
     """returns x^n mod p
 
-    >>> exp(2,47,1000007)
+    >>> exp(2,47)
     199807
     >>> exp(3,51,678)
     93
@@ -27,8 +27,7 @@ def exp(x, n, p=1000007):
     return ans
 
 
-
-def legendre(a,b):
+def legendre(a, b):
     """"Calculates the Legendre symbol for the given parameters
 
 
