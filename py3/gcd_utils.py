@@ -7,8 +7,8 @@
 # Last Modified By  : Kaushik S Kalmady
 
 
-def gcd(a, b):
-    """Euclid's algorithm for gcd
+def recursive_gcd(a, b):
+    """Euclid's algorithm for gcd (Recursive)
 
     Args:
         a: int
@@ -24,11 +24,33 @@ def gcd(a, b):
     if a == 0:
         return b
 
-    return gcd(b % a, a)
+    return recursive_gcd(b % a, a)
 
 
-def xgcd(a, b):
-    """Extended Euclidean Algorithm
+def gcd(a, b):
+    """Euclid's algorithm for gcd (Iterative)
+
+    Args:
+        a: int
+        b: int
+
+   Returns gcd(a, b) computed using Euclid's Algorithm.
+
+    >>> gcd(7, 19)
+    1
+    >>> gcd(221,34)
+    17
+    """
+    assert a > 0 and b > 0
+
+    while a:
+        a, b = b % a, a
+
+    return b
+
+
+def recursive_xgcd(a, b):
+    """Extended Euclidean Algorithm (Recursive)
 
     Args:
         a: int
@@ -39,9 +61,10 @@ def xgcd(a, b):
 
     Why does it work?
     a.x + b.y = (b % a).x1 + a.y1
-            = (b - (b//a).a).x1 + a.y1
-            = a.(y1 - (b//a).x1) + b.x1
+              = (b - (b//a).a).x1 + a.y1
+              = a.(y1 - (b//a).x1) + b.x1
 
+    Ref: http://www.geeksforgeeks.org/euclidean-algorithms-basic-and-extended/
     >>> xgcd(15, 35)
     (5, -2, 1)
     >>> xgcd(30, 20)
@@ -53,6 +76,36 @@ def xgcd(a, b):
     g, x, y = xgcd(b % a, a)
 
     return (g, y - (b//a) * x, x)
+
+
+def xgcd(a, b):
+    """Extended Euclidean Algorithm (Iterative)
+
+    Args:
+        a: int
+        b: int
+
+    We can represent gcd(a,b) = a.x + b.y
+    This function returns gcd(a, b), x, y
+
+    Ref: https://anh.cs.luc.edu/331/notes/xgcd.pdf
+    >>> xgcd(15, 35)
+    (5, -2, 1)
+    >>> xgcd(30, 20)
+    (10, 1, -1)
+    """
+    assert a > 0 and b > 0
+
+    xprev, x = 1, 0
+    yprev, y = 0, 1
+
+    while a:
+        q = b // a
+        x, xprev = xprev - q * x, x
+        y, yprev = yprev - q * y, y
+        a, b = b % a, a
+
+    return b, xprev, yprev
 
 
 def inverse(a, n):

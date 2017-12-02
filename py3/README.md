@@ -1,9 +1,9 @@
 ## Workflow
 
 - [x] Modular exponentiation
-- [ ] Euler's method for gcd
-- [ ] Extended Euler's Algorithm
-- [ ] Modular Multiplicative Inverse
+- [x] Euler's method for gcd
+- [x] Extended Euler's Algorithm
+- [x] Modular Multiplicative Inverse
 - [ ] Sieve of Eratosthenes
 - [ ] Euler Totient function
 - [ ] Legendre Symbol
