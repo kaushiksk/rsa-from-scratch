@@ -3,7 +3,7 @@
 # File              : prime_utils.py
 # Author            : Kaushik S Kalmady
 # Date              : 27.11.2017
-# Last Modified Date: 27.11.2017
+# Last Modified Date: 10.12.2017
 # Last Modified By  : Kaushik S Kalmady
 
 from math import sqrt
@@ -50,12 +50,13 @@ def phi(n):
 
     phi(n) = number of positive integers co-prime with n.
 
+    https://abhisharlives.blogspot.in/2013/03/euler-totient-function-in-3-ways.html
     """
     ans = 1
-    prime = modified_seive(n)
+    largest_prime_that_divides = modified_seive(n)
 
     while(n > 1):
-        p = prime[n]
+        p = largest_prime_that_divides[n]
         e = 0
         while(n % p == 0):
             n = n//p

@@ -4,8 +4,8 @@
 - [x] Euler's method for gcd
 - [x] Extended Euler's Algorithm
 - [x] Modular Multiplicative Inverse
-- [ ] Sieve of Eratosthenes
-- [ ] Euler Totient function
+- [x] Sieve of Eratosthenes
+- [x] Euler Totient function
 - [ ] Legendre Symbol
 - [ ] Jacobi Symbol
  - Primality test
