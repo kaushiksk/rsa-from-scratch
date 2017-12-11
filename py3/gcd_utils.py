@@ -3,7 +3,7 @@
 # File              : gcd_utils.py
 # Author            : Kaushik S Kalmady
 # Date              : 27.11.2017
-# Last Modified Date: 01.12.2017
+# Last Modified Date: 11.12.2017
 # Last Modified By  : Kaushik S Kalmady
 
 
@@ -14,8 +14,10 @@ def recursive_gcd(a, b):
         a: int
         b: int
 
-   Returns gcd(a, b) computed using Euclid's Algorithm.
+    Returns gcd(a, b) computed using Euclid's Algorithm.
 
+    EXAMPLES
+    ========
     >>> gcd(7, 19)
     1
     >>> gcd(221,34)
@@ -34,8 +36,10 @@ def gcd(a, b):
         a: int
         b: int
 
-   Returns gcd(a, b) computed using Euclid's Algorithm.
+    Returns gcd(a, b) computed using Euclid's Algorithm.
 
+    EXAMPLES
+    ========
     >>> gcd(7, 19)
     1
     >>> gcd(221,34)
@@ -56,6 +60,8 @@ def recursive_xgcd(a, b):
         a: int
         b: int
 
+    NOTES
+    =====
     We can represent gcd(a,b) = a.x + b.y
     This function returns gcd(a, b), x, y
 
@@ -64,7 +70,12 @@ def recursive_xgcd(a, b):
               = (b - (b//a).a).x1 + a.y1
               = a.(y1 - (b//a).x1) + b.x1
 
-    Ref: http://www.geeksforgeeks.org/euclidean-algorithms-basic-and-extended/
+    REFERENCES
+    ==========
+    http://www.geeksforgeeks.org/euclidean-algorithms-basic-and-extended/
+
+    EXAMPLES
+    ========
     >>> xgcd(15, 35)
     (5, -2, 1)
     >>> xgcd(30, 20)
@@ -85,10 +96,17 @@ def xgcd(a, b):
         a: int
         b: int
 
+    NOTES
+    =====
     We can represent gcd(a,b) = a.x + b.y
     This function returns gcd(a, b), x, y
 
-    Ref: https://anh.cs.luc.edu/331/notes/xgcd.pdf
+    REFERENCES
+    ==========
+    https://anh.cs.luc.edu/331/notes/xgcd.pdf
+
+    EXAMPLES
+    ========
     >>> xgcd(15, 35)
     (5, -2, 1)
     >>> xgcd(30, 20)
@@ -115,9 +133,13 @@ def inverse(a, n):
         a: integer whose inverse is to be found
         n: modular base
 
+    NOTES
+    =====
     Returns the modular multiplicative inverse of 'a' under mod n
     Return value is always positive
 
+    EXAMPLES
+    ========
     >>> inverse(2, 5)
     3
     >>> inverse(17, 39)
