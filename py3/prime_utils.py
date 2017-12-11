@@ -8,12 +8,9 @@
 
 from math import sqrt
 
-from utils import exp
-
 
 def seive(n):
     """Seive of Eratosthenes
-
     Returns a list of primes less than n
     """
     myseive = [False] * (n)
@@ -26,44 +23,37 @@ def seive(n):
     return [i for i, num in enumerate(myseive) if num is False and i > 1]
 
 
-def modified_seive(n):
-    """Modified Seive of Eratosthenes for calculating Euler's Totient Function
-
-    Returns a list of length n + 1.
-    seive[i] is the largest prime that divides i.
-
-    """
-    myseive = [0] * (n + 1)
-    myseive[0] = myseive[1] = 1
-
-    for i in range(2, n + 1):
-        if not myseive[i]:
-            myseive[i] = i
-            for j in range(i, n + 1, i):
-                myseive[j] = i
-
-    return myseive
-
-
 def phi(n):
     """Returns the Euler Totient Function of n
-
     phi(n) = number of positive integers co-prime with n.
 
-    https://abhisharlives.blogspot.in/2013/03/euler-totient-function-in-3-ways.html
+    Args:
+        n: integer
+
+    REFERENCES
+    ==========
+    http://www.geeksforgeeks.org/eulers-totient-function/
+
+    EXAMPLES
+    ========
+    >>> phi(10)
+    4
+    >>> phi(7)
+    6
+    >>> phi(33500000)
+    13200000
     """
-    ans = 1
-    largest_prime_that_divides = modified_seive(n)
-
-    while(n > 1):
-        p = largest_prime_that_divides[n]
-        e = 0
-        while(n % p == 0):
-            n = n//p
-            e += 1
-        ans *= (p - 1) * exp(p, e - 1)
-
-    return ans
+    result = n
+    p = 2
+    while p * p <= n:
+        if not n % p:
+            while not n % p:
+                n /= p
+            result -= result / p
+        p += 1
+    if n > 1:  # Occurs when prime factor p > sqrt(n), there is one such number
+        result -= result / n
+    return result
 
 
 if __name__ == "__main__":
