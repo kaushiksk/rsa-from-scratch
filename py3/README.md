@@ -1,6 +1,8 @@
 ## Usage
 
-The code works with mode python2 and python3. Decrypted message in python2 will be a string, as compared to byte string in python3. Other than that there are no major differences.
+The code works with both python 2 & 3.
+For string input, decrypted message in python 2.x will be a string, as compared to a byte string in python 3.x. 
+Other than that there are no major differences.
 
 ```python
 >>> from rsa import RSA
