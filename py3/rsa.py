@@ -9,7 +9,7 @@
 import random
 from struct import unpack, pack
 
-from gcd_utils import gcd, inverse
+from .gcd_utils import gcd, inverse
 from utils import exp
 from primality_tests import miller_rabin, solovay_strassen
 
@@ -80,7 +80,7 @@ class RSA():
         while gcd(e, self.phi) != 1:
             e = random.randint(2, self.phi - 1)
 
-        # choose d, the modular inverse of e under mod phi
+        # choose d, the modular inverse of e mod phi
         d = inverse(e, self.phi)
         public_key = (e, self.n)
         private_key = (d, self.n)
@@ -102,7 +102,7 @@ class RSA():
         length = len(message)
         if length % 4:
             extra = (4 - length % 4)
-            message = bytes('\000') * extra + message
+            message = bytes('\000', "utf-8") * extra + bytes(message, "utf-8")
             length = length + extra
 
         for i in range(0, length, 4):
@@ -121,14 +121,15 @@ class RSA():
         https://github.com/dlitz/pycrypto/blob/master/lib/Crypto/Util/number.py
         """
 
-        s = bytes('')
+        s = bytes('', "utf-8")
         while number > 0:
             s = pack('>I', number & 0xffffffff) + s
             number = number >> 32
 
+        # remove padded zeros
         i = 0
         while i < len(s):
-            if s[i] != bytes('\000')[0]:
+            if s[i] != bytes('\000', "utf-8")[0]:
                 break
             i += 1
         return s[i:]
@@ -157,11 +158,11 @@ class RSA():
         e, n = key
         return Ciphertext(exp(message, e, n), self.is_str)
 
-    def decrypt(self, cyphertext):
+    def decrypt(self, ciphertext):
         """RSA Decryption
 
         Args:
-            cyphertext: cyphertext to decrypt
+            ciphertext: Ciphertext object to decrypt
 
         REFERENCES
         ==========
@@ -169,9 +170,9 @@ class RSA():
         """
 
         d, n = self.__private_key
-        if cyphertext.is_str:
-            return self.recover_string(exp(cyphertext.text, d, n))
-        return exp(cyphertext.text, d, n)
+        if ciphertext.is_str:
+            return self.recover_string(exp(ciphertext.text, d, n))
+        return exp(Ciphertext.text, d, n)
 
     def sign(self, message):
         """RSA signing
@@ -214,7 +215,7 @@ class Ciphertext():
 
 
         Args:
-                text: cyphertext
+                text: ciphertext(long int)
                 is_str: boolean to specify if original message was string or not
         """
 
