@@ -30,19 +30,6 @@ def exp(x, n, p=1000007):
     return ans
 
 
-def legendre(a, b):
-    """"Calculates the Legendre symbol for the given parameters
-
-
-    :param a:
-    :param b:
-    """
-
-    # Since it is internally used we assume the user passes prime b
-    # TODO test primality of b here
-    return jacobi(a, b)
-
-
 def jacobi(a, b):
     """Calculates the Jacobi symbol for the given parameters
     If b is prime, it returns the Legendre Symbol.
@@ -94,6 +81,16 @@ def jacobi(a, b):
         return ans
     else:
         return 0
+
+
+def as_bytes(string):
+    """Wrapper around bytes() function to maintain compatibility between python
+    2 and 3."""
+
+    try:
+        return bytes(string)
+    except:
+        return bytes(string, "utf-8")
 
 
 if __name__ == "__main__":

@@ -9,8 +9,8 @@
 import random
 from struct import unpack, pack
 
-from .gcd_utils import gcd, inverse
-from utils import exp
+from gcd_utils import gcd, inverse
+from utils import exp, as_bytes
 from primality_tests import miller_rabin, solovay_strassen
 
 
@@ -87,6 +87,7 @@ class RSA():
 
         return public_key, private_key
 
+    @classmethod
     def process_string(self, message):
         """Convert string to long integer
 
@@ -102,14 +103,14 @@ class RSA():
         length = len(message)
         if length % 4:
             extra = (4 - length % 4)
-            message = bytes('\000', "utf-8") * extra + bytes(message, "utf-8")
-            length = length + extra
+            message = as_bytes('\000') * extra + as_bytes(message)
 
         for i in range(0, length, 4):
             acc = (acc << 32) + unpack('>I', message[i:i+4])[0]
 
         return acc
 
+    @classmethod
     def recover_string(self, number):
         """Convert long to byte string
 
@@ -121,7 +122,7 @@ class RSA():
         https://github.com/dlitz/pycrypto/blob/master/lib/Crypto/Util/number.py
         """
 
-        s = bytes('', "utf-8")
+        s = as_bytes('')
         while number > 0:
             s = pack('>I', number & 0xffffffff) + s
             number = number >> 32
@@ -129,7 +130,7 @@ class RSA():
         # remove padded zeros
         i = 0
         while i < len(s):
-            if s[i] != bytes('\000', "utf-8")[0]:
+            if s[i] != as_bytes('\000')[0]:
                 break
             i += 1
         return s[i:]
@@ -153,6 +154,7 @@ class RSA():
             if len(message) > 32:
                 raise ValueError("Please enter a smaller string")
             message = self.process_string(message)
+
         assert message.bit_length() <= self.n.bit_length()
 
         e, n = key
@@ -172,7 +174,7 @@ class RSA():
         d, n = self.__private_key
         if ciphertext.is_str:
             return self.recover_string(exp(ciphertext.text, d, n))
-        return exp(Ciphertext.text, d, n)
+        return exp(ciphertext.text, d, n)
 
     def sign(self, message):
         """RSA signing
