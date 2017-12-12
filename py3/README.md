@@ -12,11 +12,14 @@
    - [x] Fermat's Primality Test
    - [x] Solovay-Strassen Primality Test
    - [x] Miller Rabin Primality Test
+ - RSA
+   - [x] Prime number generation/selection
+   - [x] Key generation
+   - [x] Encryption
+   - [x] Decryption
+   - [x] Signing
+   - [x] Verification
+## Extras
  - Integer Factorization
    - [ ] Pollard's Rho method
    - [ ] Pollard's p-1 method
- - RSA
-   - [ ] Prime number generation/selection
-   - [ ] Key generation
-   - [ ] Encryption
-   - [ ] Decryption

@@ -18,18 +18,21 @@ Implementing RSA from scratch in different languages.
    - Lucas Primality Test
    - Solovay-Strassen Primality Test
    - Miller Rabin Primality Test
- - Integer Factorization
-   - Pollard's Rho method
-   - Pollard's p-1 method
  - RSA
    - Prime number generation/selection
    - Key generation
    - Encryption
    - Decryption
+   - Signing
+   - Verification
+
+## Extras
+ - Integer Factorization
+   - Pollard's Rho method
+   - Pollard's p-1 method
 
 # Languages 
-
-- [ ] Python
+- [x] Python
 - [ ] Erlang
 - [ ] Rust
 - [ ] C/C++
