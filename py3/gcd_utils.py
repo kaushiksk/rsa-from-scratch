@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # File              : gcd_utils.py
 # Author            : Kaushik S Kalmady
@@ -114,8 +114,8 @@ def xgcd(a, b):
     """
     assert a > 0 and b > 0
 
-    xprev, x = 1, 0
-    yprev, y = 0, 1
+    xprev, x = 0, 1
+    yprev, y = 1, 0
 
     while a:
         q = b // a
