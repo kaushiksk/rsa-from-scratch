@@ -6,13 +6,12 @@
 - [x] Modular Multiplicative Inverse
 - [x] Sieve of Eratosthenes
 - [x] Euler Totient function
-- [ ] Legendre Symbol
-- [ ] Jacobi Symbol
+- [x] Legendre Symbol
+- [x] Jacobi Symbol
  - Primality test
-   - [ ] Fermat's Primality Test
-   - [ ] Lucas Primality Test
-   - [ ] Solovay-Strassen Primality Test
-   - [ ] Miller Rabin Primality Test
+   - [x] Fermat's Primality Test
+   - [x] Solovay-Strassen Primality Test
+   - [x] Miller Rabin Primality Test
  - Integer Factorization
    - [ ] Pollard's Rho method
    - [ ] Pollard's p-1 method
