@@ -3,18 +3,19 @@
 # File              : rsa.py
 # Author            : Kaushik S Kalmady
 # Date              : 12.12.2017
-# Last Modified Date: 12.12.2017
+# Last Modified Date: 13.12.2017
 # Last Modified By  : Kaushik S Kalmady
 
 import random
-from struct import unpack, pack
+from struct import pack, unpack
 
 from gcd_utils import gcd, inverse
-from utils import exp, as_bytes
 from primality_tests import miller_rabin, solovay_strassen
+from prime_utils import generate_large_prime
+from utils import as_bytes, exp
 
 
-class RSA():
+class RSA(object):
     """RSA Cryptosystem
     This Class is to be used as proof of concept for the demonstation of the
     RSA cryptosystem.
@@ -42,30 +43,14 @@ class RSA():
         else:
             self.primality_test = solovay_strassen
 
-        self.__p = self.__generate_large_prime()
-        self.__q = self.__generate_large_prime()
+        self.__p = generate_large_prime(self.bit_size, self.primality_test)
+        self.__q = generate_large_prime(self.bit_size, self.primality_test)
         while self.__p == self.__q:
-            self.__q = self.__generate_large_prime()
+            self.__q = generate_large_prime(self.bit_size, self.primality_test)
 
         self.n = self.__p * self.__q
         self.phi = (self.__p - 1) * (self.__q - 1)
-        self.public_key, self.__private_key = self.__generate_keys()
-
-    def __generate_large_prime(self):
-        """generate a large a prime number by incremental search
-
-        REFERENCES
-        ==========
-        https://crypto.stackexchange.com/questions/1970/how-are-primes-generated-for-rsa
-
-        """
-        # Get a random bit_size bit integer
-        p = random.getrandbits(self.bit_size)
-        if not p & 1:  # make sure it's odd
-            p += 1
-        while not self.primality_test(p):  # test for primality
-            p = p + 2
-        return p
+        self.__public_key, self.__private_key = self.__generate_keys()
 
     def __generate_keys(self):
         """generate public and private keys for current session
@@ -86,6 +71,14 @@ class RSA():
         private_key = (d, self.n)
 
         return public_key, private_key
+
+    @property
+    def public_key(self):
+        return self.__public_key
+
+    @public_key.setter
+    def public_key(self, val):
+        raise Exception("You are not allowed to alter generated keys")
 
     @classmethod
     def process_string(self, message):

@@ -6,7 +6,10 @@
 # Last Modified Date: 10.12.2017
 # Last Modified By  : Kaushik S Kalmady
 
+import random
 from math import sqrt
+
+from primality_tests import miller_rabin
 
 
 def seive(n):
@@ -54,6 +57,28 @@ def phi(n):
     if n > 1:  # Occurs when prime factor p > sqrt(n), there is one such number
         result -= result / n
     return result
+
+
+def generate_large_prime(bit_size, primality_test=miller_rabin):
+    """generate a large a prime number by incremental search
+
+    Args:
+        bit_size: number of bits in generated prime. If you want a 100 bit long
+                  prime set bit_size = 100
+        primality_test: primality_test to use
+
+    REFERENCES
+    ==========
+    https://crypto.stackexchange.com/questions/1970/how-are-primes-generated-for-rsa
+
+    """
+    # Get a random bit_size bit integer
+    p = random.getrandbits(bit_size)
+    if not p & 1:  # make sure it's odd
+        p += 1
+    while not primality_test(p):  # test for primality
+        p = p + 2
+    return p
 
 
 if __name__ == "__main__":
