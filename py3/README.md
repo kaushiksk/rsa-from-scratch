@@ -43,8 +43,31 @@ Exception: You are not allowed to alter generated keys
 (56618467399119298776135038168667997056624964942029346840873882494861567586229L, 92020774583088837673591629484044516416427751099585188055672485398962861161269L)
 ```
 
+Digital signatures can be achieved in a similar manner. Alice signs a string or number with her private key.
+```python
+>>> sign_a = A.sign("Alice's Signature")
+```
 
+Bob or Eve can verify this. It can only be verified with Alice's public key.
+```python
+>>> B.verify(sign_a, A.public_key)
+"Alice's Signature"
+>>> E.verify(sign_a, A.public_key)
+"Alice's Signature"
+>>> B.verify(sign_a, E.public_key)
+'\x1cv\x04@j\xf2\x04\x83!\xab\x01uN\xd8\x02Y\xc8\xd43\rD\x59c9I@c\x92\x0c)/\xe2\x9c0'
+```
 
+The `process_string()` and `recover_string` `@classmethod`s are used to convert between byte strings and long integers. It is a slightly simplified version of the code [here](https://github.com/dlitz/pycrypto/blob/master/lib/Crypto/Util/number.py)
+
+```python
+>>> RSA.process_string("Hi Bob")
+79616349990754
+>> RSA.process_string("Hi Bob what's up?")
+24640066858828187311071388516817835487295L
+>>> RSA.recover_string(79616349990754)
+'Hi Bob'
+```
 
 ## Functions Implemented
 
