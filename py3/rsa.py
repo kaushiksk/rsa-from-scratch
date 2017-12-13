@@ -182,9 +182,18 @@ class RSA(object):
         ==========
         https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Signing_messages
         """
+        # If input is string, convert it to long first
+        self.is_str = 0
+        if type(message) is str:
+            self.is_str = 1
+            if len(message) > 32:
+                raise ValueError("Please enter a smaller string")
+            message = self.process_string(message)
+
+        assert message.bit_length() <= self.n.bit_length()
 
         d, n = self.__private_key
-        return Ciphertext(exp(message, d, n))
+        return Ciphertext(exp(message, d, n), self.is_str)
 
     def verify(self, signature, key):
         """RSA signature verification
@@ -199,6 +208,8 @@ class RSA(object):
         """
 
         e, n = key
+        if signature.is_str:
+            return self.recover_string(exp(signature.text, e, n))
         return exp(signature.text, e, n)
 
 

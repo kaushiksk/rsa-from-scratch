@@ -35,6 +35,17 @@ The API remains the same for numbers
 4081228201739686282145927510867027940582326297585236661320804597753581131993L
 ```
 
+You can view anyone's public key but cannot alter it directly.
+```python
+>>> A.public_key = (2,3)
+Exception: You are not allowed to alter generated keys
+>> A.public_key
+(56618467399119298776135038168667997056624964942029346840873882494861567586229L, 92020774583088837673591629484044516416427751099585188055672485398962861161269L)
+```
+
+
+
+
 ## Functions Implemented
 
 - [x] Modular exponentiation
