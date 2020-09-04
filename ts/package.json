@@ -2,16 +2,16 @@
   "name": "rsasim",
   "version": "1.0.0",
   "description": "Typescript implementation of rsa from scracth - for fun and experimenting",
-  "main": "index.js",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.{ts,js}\"",
     "lint": "tslint -p tsconfig.json",
     "test": "jest --config jestconfig.json"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["RSA"],
+  "author": "Kaushik S Kalmady",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^26.0.13",
