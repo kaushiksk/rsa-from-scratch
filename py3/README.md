@@ -1,3 +1,6 @@
+The code here has been exported into a python packag: [rsasim](https://github.com/kaushiksk/rsasim)
+Refer to that repo for latest changes and developments.
+
 ## Usage
 
 The code works with both python 2 & 3.
