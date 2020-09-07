@@ -10,7 +10,9 @@
     "lint": "tslint -p tsconfig.json",
     "test": "jest --config jestconfig.json"
   },
-  "keywords": ["RSA"],
+  "keywords": [
+    "RSA"
+  ],
   "author": "Kaushik S Kalmady",
   "license": "ISC",
   "devDependencies": {
