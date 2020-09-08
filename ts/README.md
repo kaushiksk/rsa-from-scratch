@@ -1,0 +1,21 @@
+## Functions Implemented
+
+- [x] Modular exponentiation
+- [x] Euler's method for gcd
+- [x] Extended Euler's Algorithm
+- [x] Modular Multiplicative Inverse
+- [ ] Sieve of Eratosthenes
+- [ ] Euler Totient function
+- [ ] Legendre Symbol
+- [ ] Jacobi Symbol
+ - Primality test
+   - [ ] Fermat's Primality Test
+   - [ ] Solovay-Strassen Primality Test
+   - [ ] Miller Rabin Primality Test
+ - RSA
+   - [ ] Prime number generation/selection
+   - [ ] Key generation
+   - [ ] Encryption
+   - [ ] Decryption
+   - [ ] Signing
+   - [ ] Verification
