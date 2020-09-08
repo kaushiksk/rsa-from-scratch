@@ -1,4 +1,4 @@
-import { recursiveGCD, gcd, xgcd, ExtendedGCDReturnValue } from '../gcdUtils';
+import { recursiveGCD, gcd, xgcd, inverse, ExtendedGCDReturnValue } from '../gcdUtils';
 
 describe('recursiveGCD', () => {
     it('throw error if any argument is negative', () => {
@@ -17,8 +17,8 @@ describe('recursiveGCD', () => {
     });
 
     it('should handle the case when input is zero', () => {
-        expect(recursiveGCD(7, 0)).toBe(7);
-        expect(recursiveGCD(0, 7)).toBe(7);
+        expect(() => recursiveGCD(7, 0)).toThrow(Error);
+        expect(() => recursiveGCD(0, 7)).toThrow(Error);
     });
 });
 
@@ -39,8 +39,8 @@ describe('gcd', () => {
     });
 
     it('should handle the case when input is zero', () => {
-        expect(gcd(7, 0)).toBe(7);
-        expect(gcd(0, 7)).toBe(7);
+        expect(() => gcd(7, 0)).toThrow(Error);
+        expect(() => gcd(0, 7)).toThrow(Error);
     });
 });
 
@@ -62,7 +62,29 @@ describe('xgcd', () => {
     });
 
     it('should handle the case when input is zero', () => {
-        let xgcdReturnValue: ExtendedGCDReturnValue = xgcd(7, 0);
-        expect(xgcdReturnValue.gcd).toBe(7);
+        expect(() => xgcd(7, 0)).toThrow(Error);
     });
+});
+
+describe('inverse', () => {
+  const greaterThanZeroMockString: string = "Both numbers have to be > 0";
+
+  it('throw error if any argument is negative', () => {
+      expect(() => inverse(-1, 10)).toThrow(greaterThanZeroMockString);
+      expect(() => inverse(10, -1)).toThrow(greaterThanZeroMockString);
+      expect(() => inverse(-1, -1)).toThrow(greaterThanZeroMockString);
+  });
+
+  it('should return correct inverse for co-primes', () => {
+      expect(inverse(2, 5)).toBe(3);
+      expect(inverse(17, 39)).toBe(23);
+  });
+
+  it('throw error when inverse gcd != 1', () => {
+    expect(() => inverse(2, 4)).toThrow("Inverse does not exist.");
+  });
+
+  it('should handle the case when input is zero', () => {
+    expect(() => inverse(7, 0)).toThrow(greaterThanZeroMockString);
+});
 });

@@ -1,6 +1,8 @@
+const greaterThanZeroErrorString: string = 'Both numbers have to be > 0';
+
 export function recursiveGCD(a: number, b: number): number {
-    if (a < 0 || b < 0) {
-        throw new Error('Both numbers have to be >= 0');
+    if (a <= 0 || b <= 0) {
+        throw new Error(greaterThanZeroErrorString);
     }
 
     return recursiveGCDHelper(a, b);
@@ -11,8 +13,8 @@ function recursiveGCDHelper(a: number, b: number): number {
 }
 
 export function gcd(a: number, b: number): number {
-    if (a < 0 || b < 0) {
-        throw new Error('Both numbers have to be >= 0');
+    if (a <= 0 || b <= 0) {
+        throw new Error(greaterThanZeroErrorString);
     }
 
     while (a !== 0) {
@@ -31,8 +33,8 @@ export interface ExtendedGCDReturnValue {
 }
 
 export function xgcd(a: number, b: number): ExtendedGCDReturnValue {
-    if (a < 0 || b < 0) {
-        throw new Error('Both numbers have to be >= 0');
+    if (a <= 0 || b <= 0) {
+        throw new Error('Both numbers have to be > 0');
     }
 
     let xprev: number = 0;
@@ -63,4 +65,14 @@ export function xgcd(a: number, b: number): ExtendedGCDReturnValue {
         x: xprev,
         y: yprev,
     };
+}
+
+export function inverse(a:number, n:number) :  number {
+    let {gcd, x} = xgcd(a,  n);
+
+    if (gcd !== 1){
+        throw new Error('Inverse does not exist.');
+    }
+    
+    return (x % n + n) % n;
 }
