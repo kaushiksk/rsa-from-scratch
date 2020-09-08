@@ -1,5 +1,12 @@
 const greaterThanZeroErrorString: string = 'Both numbers have to be > 0';
 
+/**
+ * Euclid's algorithm for gcd (Recursive)
+ * @param a : number
+ * @param b : number
+ *
+ * Returns gcd(a, b) computed using Euclid's Algorithm.
+ */
 export function recursiveGCD(a: number, b: number): number {
     if (a <= 0 || b <= 0) {
         throw new Error(greaterThanZeroErrorString);
@@ -8,10 +15,17 @@ export function recursiveGCD(a: number, b: number): number {
     return recursiveGCDHelper(a, b);
 }
 
-function recursiveGCDHelper(a: number, b: number): number {
+const recursiveGCDHelper = function (a: number, b: number): number {
     return a === 0 ? b : recursiveGCDHelper(b % a, a);
-}
+};
 
+/**
+ * Euclid's algorithm for gcd (Iterative)
+ * @param a : number
+ * @param b : number
+ *
+ * Returns gcd(a, b) computed using Euclid's Algorithm.
+ */
 export function gcd(a: number, b: number): number {
     if (a <= 0 || b <= 0) {
         throw new Error(greaterThanZeroErrorString);
@@ -32,6 +46,16 @@ export interface ExtendedGCDReturnValue {
     y: number;
 }
 
+/**
+ * Extended Euclidean Algorithm (Iterative)
+ * @param a : number
+ * @param b : number
+ *
+ * We can represent gcd(a,b) = a.x + b.y
+ * This function returns gcd(a, b), x, y
+ *
+ * Reference: https://anh.cs.luc.edu/331/notes/xgcd.pdf
+ */
 export function xgcd(a: number, b: number): ExtendedGCDReturnValue {
     if (a <= 0 || b <= 0) {
         throw new Error('Both numbers have to be > 0');
@@ -67,12 +91,19 @@ export function xgcd(a: number, b: number): ExtendedGCDReturnValue {
     };
 }
 
-export function inverse(a:number, n:number) :  number {
-    let {gcd, x} = xgcd(a,  n);
+/**
+ * Modular Multiplicative Inverse
+ * @param a : number, integer whose inverse is to be found
+ * @param n : number, modular base
+ *
+ * Returns the modular multiplicative inverse of 'a' under mod n
+ */
+export function inverse(a: number, n: number): number {
+    let { gcd, x } = xgcd(a, n)
 
-    if (gcd !== 1){
+    if (gcd !== 1) {
         throw new Error('Inverse does not exist.');
     }
-    
-    return (x % n + n) % n;
+
+    return ((x % n) + n) % n;
 }

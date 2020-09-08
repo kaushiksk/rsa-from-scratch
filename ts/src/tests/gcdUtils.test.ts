@@ -67,24 +67,24 @@ describe('xgcd', () => {
 });
 
 describe('inverse', () => {
-  const greaterThanZeroMockString: string = "Both numbers have to be > 0";
+    const greaterThanZeroMockString: string = 'Both numbers have to be > 0';
 
-  it('throw error if any argument is negative', () => {
-      expect(() => inverse(-1, 10)).toThrow(greaterThanZeroMockString);
-      expect(() => inverse(10, -1)).toThrow(greaterThanZeroMockString);
-      expect(() => inverse(-1, -1)).toThrow(greaterThanZeroMockString);
-  });
+    it('throw error if any argument is negative', () => {
+        expect(() => inverse(-1, 10)).toThrow(greaterThanZeroMockString);
+        expect(() => inverse(10, -1)).toThrow(greaterThanZeroMockString);
+        expect(() => inverse(-1, -1)).toThrow(greaterThanZeroMockString);
+    });
 
-  it('should return correct inverse for co-primes', () => {
-      expect(inverse(2, 5)).toBe(3);
-      expect(inverse(17, 39)).toBe(23);
-  });
+    it('should return correct inverse for co-primes', () => {
+        expect(inverse(2, 5)).toBe(3);
+        expect(inverse(17, 39)).toBe(23);
+    });
 
-  it('throw error when inverse gcd != 1', () => {
-    expect(() => inverse(2, 4)).toThrow("Inverse does not exist.");
-  });
+    it('throw error when inverse gcd != 1', () => {
+        expect(() => inverse(2, 4)).toThrow('Inverse does not exist.');
+    });
 
-  it('should handle the case when input is zero', () => {
-    expect(() => inverse(7, 0)).toThrow(greaterThanZeroMockString);
-});
+    it('should handle the case when input is zero', () => {
+        expect(() => inverse(7, 0)).toThrow(greaterThanZeroMockString);
+    });
 });
